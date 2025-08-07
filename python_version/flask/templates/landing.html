@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Therapist Landing</title>
+
+  <!-- Inter font for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main stylesheet -->
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/styles.css') }}"
+  />
+</head>
+<body>
+  <div class="landing-container">
+    <div class="landing-card">
+      <header class="landing-header">
+        <h1 class="landing-heading">
+          Which Patient Is Right for You?
+        </h1>
+        <p class="landing-subheading">
+          Select a patient type based on your experience level:
+        </p>
+      </header>
+
+      <!-- Radio‐style card group for “Easy” vs “Hard” -->
+      <div
+        class="card-group"
+        role="radiogroup"
+        aria-label="Choose patient type"
+      >
+        <!-- CARD 1: Easy to Handle (maps to sam) -->
+        <div
+          tabindex="0"
+          role="radio"
+          aria-checked="false"
+          class="choice-card"
+          data-value="sam"
+          id="card-easy"
+        >
+          <div class="card-icon" aria-hidden="true">
+            🤝
+          </div>
+          <h2 class="card-title">Easy to Handle</h2>
+          <p class="card-desc">
+            A straightforward PTSD scenario—ideal if you’re
+            comfortable with standard techniques.
+          </p>
+        </div>
+
+        <!-- CARD 2: Hard to Work With (maps to aisha) -->
+        <div
+          tabindex="0"
+          role="radio"
+          aria-checked="false"
+          class="choice-card"
+          data-value="aisha"
+          id="card-hard"
+        >
+          <div class="card-icon" aria-hidden="true">
+            🧩
+          </div>
+          <h2 class="card-title">Hard to Work With</h2>
+          <p class="card-desc">
+            A complex trauma history—perfect if you want a
+            deeper challenge.
+          </p>
+        </div>
+      </div>
+
+      <!-- Hidden form + Continue button -->
+      <form id="therapist-form" method="get" class="form-container">
+        <input
+          type="hidden"
+          name="choice"
+          id="choice"
+          value=""
+        />
+        <button
+          type="submit"
+          class="btn continue-btn"
+          id="continue"
+          disabled
+        >
+          Continue
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Grab references
+    const cards = document.querySelectorAll('.choice-card');
+    const choiceInput = document.getElementById('choice');
+    const continueBtn = document.getElementById('continue');
+
+    let selectedValue = '';
+
+    // Function to clear selection from all cards
+    function clearSelection() {
+      cards.forEach((c) => {
+        c.classList.remove('selected');
+        c.setAttribute('aria-checked', 'false');
+      });
+    }
+
+    // When a card is clicked or focused+Enter pressed, select it
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        clearSelection();
+        card.classList.add('selected');
+        card.setAttribute('aria-checked', 'true');
+        selectedValue = card.dataset.value;
+        choiceInput.value = selectedValue;
+        continueBtn.disabled = false;
+        continueBtn.classList.add('enabled');
+      });
+
+      // Allow keyboard selection: Enter or Space
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    // Submit form by redirecting to /chat/<sam|aisha>
+    document
+      .getElementById('therapist-form')
+      .addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!selectedValue) return;
+        window.location.href = '/chat/' + selectedValue;
+        return false;
+      });
+  </script>
+</body>
+</html>

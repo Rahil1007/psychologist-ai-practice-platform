@@ -1,0 +1,178 @@
+/* ==============================
+   RESET & BASE STYLES
+   ============================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(
+      135deg,
+      #e2e8f0 0%,
+      #ffffff 100%
+    );
+    color: #1f2937;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* ==============================
+     CONTAINER & CARD
+     ============================== */
+  .landing-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1rem;
+  }
+  
+  .landing-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06);
+    padding: 2.5rem 2rem;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* ==============================
+     HEADER TEXT
+     ============================== */
+  .landing-heading {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+  }
+  
+  .landing-subheading {
+    font-size: 1rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+  }
+  
+  /* ==============================
+     CARD GROUP (TWO OPTIONS)
+     ============================== */
+  .card-group {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  /* Each card acts like a “radio” */
+  .choice-card {
+    background-color: #f9fafb;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    flex: 1;
+    cursor: pointer;
+    padding: 1.5rem 1rem;
+    text-align: left;
+    transition: all 0.2s ease;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .choice-card:hover,
+  .choice-card:focus {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  
+  .choice-card.selected {
+    background-color: #f3f4ff;
+    border-color: #6366f1;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Icon (or emoji) at top of each card */
+  .card-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+  
+  /* Title text inside card */
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+  }
+  
+  /* Description text inside card */
+  .card-desc {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.4;
+  }
+  
+  /* ==============================
+     CONTINUE BUTTON
+     ============================== */
+  .form-container {
+    margin-top: 1rem;
+  }
+  
+  .continue-btn {
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 9999px;
+    background-color: #cbd5e1;
+    color: #ffffff;
+    cursor: not-allowed;
+    opacity: 0.65;
+    transition: all 0.2s ease;
+  }
+  
+  .continue-btn.enabled {
+    background-color: #10b981; /* emerald-500 */
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+  .continue-btn.enabled:hover {
+    background-color: #059669; /* emerald-600 */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.10);
+  }
+  
+  /* ==============================
+     RESPONSIVE BREAKPOINT
+     ============================== */
+  @media (max-width: 600px) {
+    .card-group {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .landing-card {
+      padding: 2rem 1.5rem;
+    }
+    .landing-heading {
+      font-size: 1.75rem;
+    }
+    .landing-subheading {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .choice-card {
+      padding: 1.25rem 1rem;
+    }
+  }
+  
